@@ -1,0 +1,105 @@
+@import './fonts.css';
+@import './tailwind.css';
+@import './theme.css';
+
+/* Global app overrides */
+html, body {
+  background: #050505;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: none;
+}
+
+.font-display {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Scrollbar hide */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Marquee animation */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee 45s linear infinite;
+  will-change: transform;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* Fuchsia glow pulse */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.2); }
+  50% { box-shadow: 0 0 40px rgba(168, 85, 247, 0.4); }
+}
+.glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+/* Shimmer effect */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.05) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Custom scrollbar for chat */
+.thin-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(168, 85, 247, 0.3) transparent;
+}
+.thin-scrollbar::-webkit-scrollbar {
+  width: 3px;
+}
+.thin-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.thin-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(168, 85, 247, 0.3);
+  border-radius: 99px;
+}
+
+/* Glass morphism base */
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Noise texture overlay */
+.noise::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #d946ef, #a855f7, #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Touch-action for swipe */
+.touch-pan-y {
+  touch-action: pan-y;
+}
