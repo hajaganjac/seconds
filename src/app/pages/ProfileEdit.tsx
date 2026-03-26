@@ -69,26 +69,30 @@ export default function ProfileEdit() {
         </div>
       </div>
 
-      {/* Avatar */}
+      {/* Avatar — camera sits outside the ring so it doesn’t cover the portrait area */}
       <div className="flex flex-col items-center mb-8 px-5">
-        <motion.div
-          whileTap={{ scale: 0.95 }}
-          className="relative w-28 h-28 rounded-full flex items-center justify-center cursor-pointer mb-3"
-          style={{
-            background: "linear-gradient(135deg,rgba(168,85,247,0.15),rgba(217,70,239,0.1))",
-            border: "3px solid rgba(168,85,247,0.3)",
-            boxShadow: "0 0 30px rgba(168,85,247,0.15)",
-          }}
-        >
-          <User size={40} style={{ color: "rgba(168,85,247,0.5)" }} />
-          <div
-            className="absolute bottom-0 right-0 w-9 h-9 rounded-full flex items-center justify-center"
+        <div className="relative inline-flex mb-3 pt-1 pr-1">
+          <motion.div
+            whileTap={{ scale: 0.95 }}
+            className="w-28 h-28 rounded-full flex items-center justify-center cursor-pointer"
+            style={{
+              background: "linear-gradient(135deg,rgba(168,85,247,0.15),rgba(217,70,239,0.1))",
+              border: "3px solid rgba(168,85,247,0.3)",
+              boxShadow: "0 0 30px rgba(168,85,247,0.15)",
+            }}
+          >
+            <User size={40} style={{ color: "rgba(168,85,247,0.5)" }} />
+          </motion.div>
+          <button
+            type="button"
+            aria-label="Change profile photo"
+            className="absolute bottom-0 right-0 w-9 h-9 rounded-full flex items-center justify-center shadow-md"
             style={{ background: "linear-gradient(135deg,#a855f7,#d946ef)", border: "2px solid #050505" }}
           >
             <Camera size={15} className="text-white" />
-          </div>
-        </motion.div>
-        <button onClick={() => navigate("/profile/me/view")} className="flex items-center gap-1.5 text-sm" style={{ color: "#c084fc" }}>
+          </button>
+        </div>
+        <button type="button" onClick={() => navigate("/profile/me/view")} className="flex items-center gap-1.5 text-sm" style={{ color: "#c084fc" }}>
           <Eye size={14} /> View my profile
         </button>
       </div>

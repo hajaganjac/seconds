@@ -22,7 +22,7 @@ function SearchOverlay({ onClose }: { onClose: () => void }) {
   const results = query.length > 1
     ? [
         ...CIRCLES.filter((c) => c.name.toLowerCase().includes(query.toLowerCase())).map((c) => ({ type: "Circle", label: c.name, path: `/circles/${c.id}` })),
-        ...UPCOMING_EVENTS.filter((e) => e.title.toLowerCase().includes(query.toLowerCase())).map((e) => ({ type: "Event", label: e.title, path: "/events" })),
+        ...UPCOMING_EVENTS.filter((e) => e.title.toLowerCase().includes(query.toLowerCase())).map((e) => ({ type: "Event", label: e.title, path: `/events/${e.id}` })),
         ...NEWS_ITEMS.filter((n) => n.title.toLowerCase().includes(query.toLowerCase())).map((n) => ({ type: "News", label: n.title, path: "/news" })),
       ]
     : [];
@@ -281,7 +281,7 @@ export default function Home() {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.15 + i * 0.08 }}
-                onClick={() => navigate("/events")}
+                onClick={() => navigate(`/events/${event.id}`)}
                 whileTap={{ scale: 0.97 }}
                 className="flex-shrink-0 cursor-pointer rounded-[22px] p-4 flex flex-col gap-3"
                 style={{

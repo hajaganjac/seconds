@@ -4,17 +4,20 @@ import { motion, AnimatePresence } from "motion/react";
 import { ArrowLeft, Users, Check, UserPlus, MessageCircle, MoreHorizontal, User, X } from "lucide-react";
 import { CIRCLES, MEMBERS } from "../data";
 import { useApp } from "../AppContext";
+import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 
 function MemberCard({
   member,
   circleColor,
   onMessage,
   onConnect,
+  onViewProfile,
 }: {
   member: (typeof MEMBERS)[0];
   circleColor: string;
   onMessage: () => void;
   onConnect: () => void;
+  onViewProfile: () => void;
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -87,7 +90,7 @@ function MemberCard({
               className="w-full flex items-center gap-2 px-3 py-2.5 text-xs font-medium text-white/70 hover:text-white hover:bg-white/5 transition-colors">
               <MessageCircle size={13} /> Message
             </button>
-            <button onClick={() => setMenuOpen(false)}
+            <button onClick={() => { onViewProfile(); setMenuOpen(false); }}
               className="w-full flex items-center gap-2 px-3 py-2.5 text-xs font-medium text-white/70 hover:text-white hover:bg-white/5 transition-colors">
               <User size={13} /> View profile
             </button>
@@ -145,7 +148,7 @@ export default function CircleDetail() {
           className="relative h-32 rounded-[24px] overflow-hidden mb-6"
           style={{ border: "1px solid rgba(255,255,255,0.08)" }}
         >
-          <img src={circle.image} alt={circle.name} className="w-full h-full object-cover" />
+          <ImageWithFallback src={circle.image} alt={circle.name} className="w-full h-full object-cover" />
           <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, transparent 30%, rgba(5,5,5,0.8) 100%)" }} />
           <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse at top right, ${circle.color}25, transparent 60%)` }} />
           <div
@@ -215,6 +218,7 @@ export default function CircleDetail() {
                 circleColor={circle.color}
                 onMessage={() => handleMessage(member.id)}
                 onConnect={() => {}}
+                onViewProfile={() => navigate("/find")}
               />
             </motion.div>
           ))}

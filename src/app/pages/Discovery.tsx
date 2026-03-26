@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
-import { ArrowLeft, SlidersHorizontal, Users, ArrowUpRight, Search } from "lucide-react";
+import { ArrowLeft, Users, ArrowUpRight, Search } from "lucide-react";
 import { CIRCLES } from "../data";
 import { useApp } from "../AppContext";
 import { IcebreakerCard } from "../components/QuirkConnect";

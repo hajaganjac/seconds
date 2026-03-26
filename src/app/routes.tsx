@@ -37,6 +37,7 @@ export const router = createBrowserRouter([
       { path: "messages", Component: Messages },
       { path: "messages/:threadId", Component: Chat },
       { path: "events", Component: Events },
+      { path: "events/:eventId", Component: Events },
       { path: "news", Component: News },
       { path: "gallery", Component: Gallery },
       { path: "*", Component: NotFound },

@@ -14,13 +14,16 @@ export default function ProfileView() {
   return (
     <div className="min-h-[100dvh] pb-36 lg:pb-12">
       {/* Hero image */}
-      <div className="relative" style={{ height: 280 }}>
+      <div className="relative z-0" style={{ height: 280 }}>
         <img src={IMAGES.portrait} alt="Profile hero" className="w-full h-full object-cover" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, transparent 30%, rgba(5,5,5,0.7) 70%, #050505 100%)" }} />
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at top right, rgba(168,85,247,0.2), transparent 60%)" }} />
 
-        {/* Top actions */}
-        <div className="absolute top-14 left-5 right-5 flex items-center justify-between">
+        {/* Top actions — above overlapping avatar */}
+        <div
+          className="absolute left-5 right-5 flex items-center justify-between z-30 pointer-events-auto"
+          style={{ top: "max(3.5rem, env(safe-area-inset-top, 0px))" }}
+        >
           <motion.button
             whileTap={{ scale: 0.9 }}
             onClick={() => navigate(-1)}
@@ -39,8 +42,8 @@ export default function ProfileView() {
         </div>
       </div>
 
-      {/* Avatar (centered, overlapping hero) */}
-      <div className="flex flex-col items-center -mt-16 px-5 mb-6">
+      {/* Avatar (centered, overlapping hero — z-20 keeps it under top bar, above hero image) */}
+      <div className="relative z-20 flex flex-col items-center -mt-16 px-5 mb-6">
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}

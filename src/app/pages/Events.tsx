@@ -1,10 +1,21 @@
-import { useNavigate } from "react-router";
+import { useEffect, useRef } from "react";
+import { useNavigate, useParams } from "react-router";
 import { motion } from "motion/react";
-import { ArrowLeft, MapPin, Calendar, ExternalLink, ArrowUpRight } from "lucide-react";
+import { ArrowLeft, MapPin, Calendar, ArrowUpRight } from "lucide-react";
 import { UPCOMING_EVENTS } from "../data";
 
 export default function Events() {
   const navigate = useNavigate();
+  const { eventId } = useParams<{ eventId?: string }>();
+  const highlightedRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!eventId) return;
+    const t = window.setTimeout(() => {
+      highlightedRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 80);
+    return () => window.clearTimeout(t);
+  }, [eventId]);
 
   return (
     <div className="min-h-[100dvh] pb-36 lg:pb-12">
@@ -39,11 +50,19 @@ export default function Events() {
         {UPCOMING_EVENTS.map((event, i) => (
           <motion.div
             key={event.id}
+            ref={event.id === eventId ? highlightedRef : undefined}
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.07 }}
-            className="relative overflow-hidden group cursor-pointer rounded-[24px] p-5"
-            style={{ background: "rgba(12,12,16,0.9)", border: "1px solid rgba(255,255,255,0.07)" }}
+            className="relative overflow-hidden group cursor-pointer rounded-[24px] p-5 scroll-mt-24"
+            style={{
+              background: "rgba(12,12,16,0.9)",
+              border:
+                event.id === eventId
+                  ? "1px solid rgba(168,85,247,0.45)"
+                  : "1px solid rgba(255,255,255,0.07)",
+              boxShadow: event.id === eventId ? "0 0 0 1px rgba(168,85,247,0.2), 0 8px 32px rgba(168,85,247,0.12)" : undefined,
+            }}
             onClick={() => window.open(event.url, "_blank")}
           >
             {/* Accent top bar */}

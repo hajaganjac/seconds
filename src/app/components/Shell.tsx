@@ -36,13 +36,14 @@ export default function Shell() {
         />
 
         {/* Scrollable page content */}
-        <AnimatePresence mode="wait" initial={false}>
+        {/* sync (default): avoids a blank gap between routes that mode="wait" can cause */}
+        <AnimatePresence initial={false}>
           <motion.div
             key={location.pathname}
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.14, ease: [0.4, 0, 0.2, 1] }}
             className="absolute inset-0 overflow-y-auto overflow-x-hidden scrollbar-hide desktop-scroll-root"
             style={{ zIndex: 1 }}
           >
